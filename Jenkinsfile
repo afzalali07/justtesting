@@ -10,17 +10,13 @@ pipeline {
 
         stage('Install dependencies') {
             steps {
-                dir('Parking_slot_Booking') {
                     bat 'npm install'
-                }
             }
         }
 
         stage('Build') {
             steps {
-                dir('Parking_slot_Booking') {
                     bat 'npm run build'
-                }
             }
         }
     }
