@@ -2,39 +2,40 @@
 import { useState } from "react";
 
 function App() {
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-  const [bmi, setBmi] = useState("");
+  const [celcius, setCelcius] = useState("");
+  const [fahren, setFahren] = useState("");
 
-  function calculate() {
-    let h = height / 100;
-    let result = weight / (h * h);
-    setBmi(result.toFixed(2));
+  function celToFah(value) {
+    setCelcius(value);
+    if (value !== "") {
+      setFahren(String((Number(value) * 9 / 5) + 32));
+    } else {
+      setFahren("");
+    }
+  }
+
+  function fahToCel(value) {
+    setFahren(value);
+    if (value !== "") {
+      setCelcius(String((Number(value) - 32) * 5 / 9));
+    } else {
+      setCelcius("");
+    }
   }
 
   return (
     <div>
-      <h2>BMI Calculator</h2>
+      <input
+        placeholder="Enter Celsius Value"
+        value={celcius}
+        onChange={e => celToFah(e.target.value)}
+      />
 
       <input
-        type="number"
-        placeholder="Weight (kg)"
-        value={weight}
-        onChange={(e) => setWeight(e.target.value)}
+        placeholder="Enter Fahrenheit Value"
+        value={fahren}
+        onChange={e => fahToCel(e.target.value)}
       />
-      <br /><br />
-
-      <input
-        type="number"
-        placeholder="Height (cm)"
-        value={height}
-        onChange={(e) => setHeight(e.target.value)}
-      />
-      <br /><br />
-
-      <button onClick={calculate}>Calculate BMI</button>
-
-      {bmi && <h3>Your BMI: {bmi}</h3>}
     </div>
   );
 }
