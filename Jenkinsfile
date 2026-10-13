@@ -8,18 +8,12 @@ pipeline{
         }
         stage('Install dependencies'){
             steps{
-                dir('temp-converter'){
-
                 bat 'npm install'
-                }
             }
         }
         stage('Build'){
             steps{
-                dir('temp-converter'){
                 bat 'npm run build'
-
-                }
             }
         }
     }
